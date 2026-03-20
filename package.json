@@ -1,0 +1,64 @@
+{
+  "name": "myradio",
+  "version": "1.0.0",
+  "description": "A desktop radio player for Norwegian NRK channels",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run watch\" \"wait-on dist/renderer/index.html && electron .\"",
+    "watch": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "pack": "electron-builder --dir",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win"
+  },
+  "keywords": [
+    "radio",
+    "nrk",
+    "electron",
+    "music"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/howler": "^2.2.12",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "concurrently": "^8.2.2",
+    "css-loader": "^6.10.0",
+    "electron": "^29.1.0",
+    "electron-builder": "^24.13.3",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "wait-on": "^7.2.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "howler": "^2.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.5.1"
+  },
+  "build": {
+    "appId": "com.myradio.app",
+    "productName": "MyRadio",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/icon.png"
+    }
+  }
+}
