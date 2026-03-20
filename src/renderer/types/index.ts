@@ -31,6 +31,7 @@ export interface AppState {
   setVolume: (volume: number) => void;
   setPlaybackState: (state: PlaybackState) => void;
   addChannel: (channel: Channel) => void;
+  updateChannel: (channelId: string, updates: Partial<Channel>) => void;
   removeChannel: (channelId: string) => void;
   toggleFavorite: (channelId: string) => void;
   setSelectedCategory: (category: string | null) => void;
