@@ -1,11 +1,13 @@
-import { Channel } from '../types';
+import { Channel, Podcast, PodcastEpisode } from '../types';
 
 // Use localStorage for renderer process storage
 const STORAGE_KEYS = {
   CUSTOM_CHANNELS: 'myradio_custom_channels',
   FAVORITES: 'myradio_favorites',
   VOLUME: 'myradio_volume',
-  LAST_PLAYED: 'myradio_last_played'
+  LAST_PLAYED: 'myradio_last_played',
+  PODCASTS: 'myradio_podcasts',
+  EPISODE_POSITIONS: 'myradio_episode_positions'
 };
 
 const getStoredData = <T>(key: string, defaultValue: T): T => {
@@ -94,5 +96,47 @@ export const storageService = {
 
   saveLastPlayedChannelId(channelId: string | null): void {
     setStoredData(STORAGE_KEYS.LAST_PLAYED, channelId);
+  },
+
+  // Podcasts
+  getPodcasts(): Podcast[] {
+    return getStoredData<Podcast[]>(STORAGE_KEYS.PODCASTS, []);
+  },
+
+  savePodcasts(podcasts: Podcast[]): void {
+    setStoredData(STORAGE_KEYS.PODCASTS, podcasts);
+  },
+
+  addPodcast(podcast: Podcast): void {
+    const podcasts = this.getPodcasts();
+    podcasts.push(podcast);
+    this.savePodcasts(podcasts);
+  },
+
+  updatePodcast(podcastId: string, updates: Partial<Podcast>): void {
+    const podcasts = this.getPodcasts();
+    const index = podcasts.findIndex(p => p.id === podcastId);
+    if (index !== -1) {
+      podcasts[index] = { ...podcasts[index], ...updates };
+      this.savePodcasts(podcasts);
+    }
+  },
+
+  removePodcast(podcastId: string): void {
+    const podcasts = this.getPodcasts();
+    const filtered = podcasts.filter(p => p.id !== podcastId);
+    this.savePodcasts(filtered);
+  },
+
+  // Episode positions
+  getEpisodePosition(episodeId: string): number {
+    const positions = getStoredData<Record<string, number>>(STORAGE_KEYS.EPISODE_POSITIONS, {});
+    return positions[episodeId] || 0;
+  },
+
+  saveEpisodePosition(episodeId: string, position: number): void {
+    const positions = getStoredData<Record<string, number>>(STORAGE_KEYS.EPISODE_POSITIONS, {});
+    positions[episodeId] = position;
+    setStoredData(STORAGE_KEYS.EPISODE_POSITIONS, positions);
   }
 };
