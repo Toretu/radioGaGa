@@ -2,9 +2,9 @@
 ## Project Plan
 
 ### Project Status Dashboard
-**Version:** 1.0.3  
-**Last Updated:** March 20, 2026  
-**Current Phase:** Week 4 (Podcast Support) - ✅ Completed  
+**Version:** 1.0.4  
+**Last Updated:** March 22, 2026  
+**Current Phase:** Week 4 (Podcast Support) - ✅ Completed + Bug Fixes  
 **Repository:** [radioGaGa](https://github.com/Toretu/radioGaGa)
 
 **Progress Overview:**
@@ -533,6 +533,35 @@ git push origin v1.0.X
   - Mandates PROJECT_PLAN.md updates with each feature
   - Ensures release-ready code at each iteration
   - Provides quick reference for common tasks
+
+### March 22, 2026 - Critical Podcast Fixes and Player Bar Redesign (v1.0.4)
+- ✅ **Fixed critical episode playback bug**
+  - Episodes were not playable - using RSS feed URL instead of audio URL
+  - Modified playEpisode to use episode's actual audio file URL
+  - Episode playback now works correctly
+- ✅ **Fixed pause/resume for podcast episodes**
+  - Pause button now properly pauses podcast episodes
+  - Resume functionality maintains position
+  - Proper state management for episode playback
+- ✅ **Complete player bar redesign**
+  - Fixed player bar at bottom of screen (160px height)
+  - Always visible in both Radio and Podcast modes
+  - Horizontal layout: Now playing | Controls | Volume
+  - Episode list scrolls independently above player
+- ✅ **Added podcast skip controls**
+  - Skip forward 15 seconds button (⏩)
+  - Skip backward 15 seconds button (⏪)
+  - Only visible when playing podcasts
+- ✅ **Interactive progress bar**
+  - Click anywhere on bar to seek to that position
+  - Real-time position display (current / total)
+  - Visual progress indicator with gradient
+- ✅ **UI/UX improvements**
+  - Compact album art (60x60px) in player bar
+  - Smaller control buttons optimized for bottom bar
+  - Better spacing and visual hierarchy
+  - Progress bar integrated into controls section
+  - Time display with proper formatting
 
 ### March 20, 2026 - Podcast Support Implementation (Week 4)
 - ✅ Implemented complete podcast support with RSS feeds
