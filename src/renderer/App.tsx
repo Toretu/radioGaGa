@@ -37,8 +37,19 @@ const App: React.FC = () => {
         </aside>
         
         <main className="main-content">
-          {viewMode === 'radio' ? <Player /> : <EpisodeList />}
+          {viewMode === 'radio' ? (
+            <div className="radio-view">
+              {/* Radio channels view is just the empty space */}
+            </div>
+          ) : (
+            <EpisodeList />
+          )}
         </main>
+      </div>
+
+      {/* Fixed player bar at bottom */}
+      <div className="player-bar">
+        <Player />
       </div>
     </div>
   );

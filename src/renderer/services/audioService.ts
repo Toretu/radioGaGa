@@ -92,7 +92,13 @@ class AudioService {
 
   playEpisode(episode: PodcastEpisode, podcast: Channel, startPosition: number = 0) {
     this.currentEpisode = episode;
-    this.play(podcast, startPosition);
+    // Create a temporary channel object with the episode URL for playback
+    const episodeChannel: Channel = {
+      ...podcast,
+      url: episode.url,  // Use the episode's audio URL
+      type: 'podcast'
+    };
+    this.play(episodeChannel, startPosition);
   }
 
   private startPositionTracking() {
